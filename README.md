@@ -1,14 +1,15 @@
 
-
 ### Curso-Introdutório-Next-Generation-Sequenting-(NGS)
 
-## Schedule
+## 2ª Parte - Introdução à análise de dados NGS
 
-**1.** 
+## 
+
+**1.** Agenda
 
 **2.** Introduction to Linux shell
 
-**3.**
+**3.** 
 
 **4.**
 
