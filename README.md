@@ -1,1 +1,1 @@
-# Curso-Int-NGS-
+### Curso-Introdutório-Next-Generation-Sequenting-(NGS)
