@@ -1,1 +1,4 @@
+# NGS - Exercises
+
+> FASTQ files
 
