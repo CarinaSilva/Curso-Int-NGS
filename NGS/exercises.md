@@ -35,9 +35,23 @@ This serves to exemplify that most reads in current sequencing machines are like
 
 Many sequencing machines can read both ends of a fragment. In this case, the machine will generate two **paired** fastq files, one with the forward reads and another with the reverse reads. You can find an example of this is the example fastq files paired_end_example_1 (containing the forward reads) and paired_end_example_2 (containing the reverse reads). These fastq are paired because the reads for the same fragment are in the same order in the two files. For example, the first read in the forward fastq correponds to the forward reading of the same fragment as the first read in the reverse fastq.
 
-![Adaptor](images/paired-end.jpg)
 
-**Exercise 5**: Inside the folder fastq_examples you can see several compressed fastq files. Uncompress the fastq files paired_end_example_1.fastq.gz and paired_end_example_2.fastq.gz that are in the folder files. Open the uncompressed fastq files using any text editor (eg. kate). Can you see a relationship betweem the reads in both files?
+**Exercise 5**: Inside the folder files you can see several compressed fastq files. Uncompress the fastq files paired_end_example_1.fastq.gz and paired_end_example_2.fastq.gz that are in the folder files. Open the uncompressed fastq files using any text editor (eg. kate). Can you see a relationship betweem the reads in both files?
+
+Create an empty  directory to work in the exercise and copy or download the raw data to it:
+
+```{r}
+
+mkdir quality_control
+cd quality_control
+unzip paired_end_example_1.fastq.gz  paired_end_example_2.fastq.gz
+
+# Use the command head to have a view of the first lines of the file
+
+head paired_end_example_1.fastq.gz
+
+```
+
 
 <details><summary>Click Here to see the answer</summary><p>
 	
@@ -47,7 +61,7 @@ The read identifiers are the same, in the same order (though the sequences are n
 <br/>
 <br/>
 
-> Quality Control (QC)
+> ##Quality Control (QC)
 
 ### <a id="LO2.2">2.2 - Quality Check of FastQ data</a>
 
