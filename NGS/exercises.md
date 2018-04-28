@@ -23,7 +23,7 @@ The base quality character is 'I', which corresponds to the decimal 73 in the AS
 <details><summary>Click Here to see the answer</summary><p>
 The base quality character is '/', which corresponds to the decimal 47 in the ASCII table. Q = 47-33 = 14. P(14) = 10^(-14/10) = 10^-1.4 ~= 4% error.
 </p></details>
-<br/>
+ <br/>
 
 **Exercise 4**: If all bases of a ficticious machine had a Q=20 (1% probability of error), what would be the probability that one 100bp read from that machine would be completely correct?
 <details><summary>Click Here to see the answer</summary><p>
@@ -61,7 +61,7 @@ The read identifiers are the same, in the same order (though the sequences are n
 <br/>
 <br/>
 
-> ##Quality Control (QC)
+> ## Quality Control (QC)
 
 ### <a id="LO2.2">2.2 - Quality Check of FastQ data</a>
 
@@ -69,11 +69,10 @@ High Throughput Sequencing machines read thousands or millions of sequences in p
 
 Some plots indicate distribution of base qualities along the length of reads. At least for illumina data, on average the quality of each base tends to decrease along the length of the read. 
 
-![Base Quality](images/base_quality.png) ![Tile Quality](images/tile_quality.png)
 
 Other plots indicate biases in nucleotidic content of reads, either globally (such as %GC plots), or positionally. Global bias in nucleotidic content can be useful to search for signs of contaminants. On the other hand, positional bias are useful to detect presence of artefactual sequences in your reads such as adaptors. Another insight you may obtain from this information are potential biases in the preparation of your library. For example, random hexamer priming is actually not truly random, and preferentially selects certain sequences. The currently popular transposase-based enzymatic protocol, although reasonably random, is also not completely random, and you can see this through positional bias, particularly in the beginning of reads. The presence of adaptors is a relatively common event, and therefore specific plots exist to detect the presence of the most commonly used adaptors. Finally, the presence of repetitive sequences can also suggest contaminants, pcr artifacts, or other types of bias.
 
-![Base Bias](images/base_bias.png) ![Adaptor](images/adaptor.png)
+
 
 **NOTE**: Given the size of fastq files (usually in the order of Gb), they are most frequently compressed as fastq.gz files. In fact, most tools (such as FastQC) work directly with fastq.gz to reduce space.
 
