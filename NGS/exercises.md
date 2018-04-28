@@ -1,9 +1,9 @@
 # Exercises
 
-> FASTQ files
+> ## FASTQ files
 
 
-**TASK**: Calculate the probability of error of the bases of the following read in the fastq format:
+**Exercise 1**: Calculate the probability of error of the bases of the following read in the fastq format:
 
 	@SRR022885.1 BI:080102_SL-XAR_0001_FC201E9AAXX:6:1:752:593/1
 	CGTACCAATTATTCAACGTCGCCAGTTGCTTCATGT
@@ -12,20 +12,20 @@
 
 **NOTE**: Phred+33 (Sanger fastq) is the current standard format. Nonetheless, with older illumina data (before 2009) preferred to start at the character '@' (ASCII: 64) instead of '!'. This Phred+64 format is the old illumina fastq. Some tools (like FastQC) can infer the format, while in others you need to specify.
 
-**QUESTION**: What is the probability of error of the first base of the read?
+**Exercise 2**: What is the probability of error of the first base of the read?
 <details><summary>Click Here to see the answer</summary><p>
 The base quality character is 'I', which corresponds to the decimal 73 in the ASCII table. Q = 73-33 = 40. P(40) = 10^(-40/10) = 10^-4 = 0.01% error.
 </p></details>
 
 <br/>
 
-**QUESTION**: What is the probability of error of the last base of the read?
+**Exercise 3**: What is the probability of error of the last base of the read?
 <details><summary>Click Here to see the answer</summary><p>
 The base quality character is '/', which corresponds to the decimal 47 in the ASCII table. Q = 47-33 = 14. P(14) = 10^(-14/10) = 10^-1.4 ~= 4% error.
 </p></details>
 <br/>
 
-**QUESTION**: If all bases of a ficticious machine had a Q=20 (1% probability of error), what would be the probability that one 100bp read from that machine would be completely correct?
+**Exercise 4**: If all bases of a ficticious machine had a Q=20 (1% probability of error), what would be the probability that one 100bp read from that machine would be completely correct?
 <details><summary>Click Here to see the answer</summary><p>
 P(correct)=(0.99)^100 ~= 36.6%!
 
@@ -37,22 +37,17 @@ Many sequencing machines can read both ends of a fragment. In this case, the mac
 
 ![Adaptor](images/paired-end.jpg)
 
-**QUESTION**: Inside the folder fastq_examples you can see several compressed fastq files. Uncompress the fastq files paired_end_example_1.fastq.gz and paired_end_example_2.fastq.gz that are in the folder fastq_examples (either by clicking on the files, or using gunzip on the command line). Open the uncompressed fastq files using any text editor (eg. kate). Can you see a relationship betweem the reads in both files?
+**Exercise 5**: Inside the folder fastq_examples you can see several compressed fastq files. Uncompress the fastq files paired_end_example_1.fastq.gz and paired_end_example_2.fastq.gz that are in the folder files. Open the uncompressed fastq files using any text editor (eg. kate). Can you see a relationship betweem the reads in both files?
+
 <details><summary>Click Here to see the answer</summary><p>
+	
 The read identifiers are the same, in the same order (though the sequences are not). This is because they are readings of the same fragment, one (_1) in the forward and another (_2) in the reverse direction. Often the indication of forward and reverse is in the identifier itself.
+
 </p></details>
 <br/>
 <br/>
 
-**NOTE**: Turn on the green light when you're finished. Assess how well you achieved the learning outcome. For this, see how well you responded to the different questions during the activities and also make the following questions to yourself.
-
-* How well do you understand the content of a fastQ file?
-
-* Can you manually calculate the probability of error associated to any given base in a fastq file?
-
-* Did you understand the difference between single-end and paired-end reads?
-<br/>
-<br/>
+> Quality Control (QC)
 
 ### <a id="LO2.2">2.2 - Quality Check of FastQ data</a>
 
@@ -68,9 +63,9 @@ Other plots indicate biases in nucleotidic content of reads, either globally (su
 
 **NOTE**: Given the size of fastq files (usually in the order of Gb), they are most frequently compressed as fastq.gz files. In fact, most tools (such as FastQC) work directly with fastq.gz to reduce space.
 
-**TASK**: Open a terminal. type 'fastqc' and press enter. The graphical interface of FastQC should appear. Open the file MiSeq_76bp.fastq.gz inside of the folder fastq_examples. Look at the different plots you obtained. Next, open the file MiSeq_250bp.fastq.gz.
+**Exercise 6**: Open a terminal. type 'fastqc' and press enter. The graphical interface of FastQC should appear. Open the file MiSeq_76bp.fastq.gz inside of the folder files. Look at the different plots you obtained. Next, open the file MiSeq_250bp.fastq.gz.
 
-**QUESTION**: What information is in a FastQC report?
+**Exercise 7**: What information is in a FastQC report?
 <details><summary>Click Here to see the answer</summary>
 
 A FastQC report includes, among other things:  
@@ -95,22 +90,22 @@ A FastQC report includes, among other things:
   
 </details><br/>
 
-**QUESTION**: What are the main differences between the reports of both fastq files?
+**Exercise 8**: What are the main differences between the reports of both fastq files?
 <details><summary>Click Here to see the answer</summary>
 The MiSeq_250bp fastq file contains 10000 reads of 250bp, while the MiSeq_76bp contains 1000 reads of 76bp. The MiSeq_250bp reads have a lower per base sequence quality at their end, while the reads of the MiSeq_76bp keep a good quality throughout. The MiSeq_76bp reads contain a very noticeable nucleotide positional bias particularly after position 36. MiSeq_250bp also contain a bit of nucleotide positional bias, but less and only for the first 10bp. The MiSeq_250bp reads display an apparently bimodal GC distribution, while the MiSeq_76bp reads seem closer to a single normal distribution. Finally, MiSeq_76bp contain a clear presence of a known Illumina adaptor after position 36 (probably the reason for the nucleotide positional bias we saw before), while MiSeq_250bp contain a much smaller frequency of another Illumina adaptor towards the ends of the reads.
 </details>
 <br/>
 
-**TASK**: Insider the folder fastq_examples, you can see fastq files from differente sequencing technologies or applications. In a terminal window, go to the folder fastq_examples. Type 'fastqc *.fastq.gz' and press enter. Inside the folder, you should now see a series of html files with FastQC reports of each of the fastq files. You can open them with the web browser by clicking on them with the mouse, or by running 'firefox *.html'.
+**Exercise 9**: Insider the folder fastq_examples, you can see fastq files from differente sequencing technologies or applications. In a terminal window, go to the folder fastq_examples. Type 'fastqc *.fastq.gz' and press enter. Inside the folder, you should now see a series of html files with FastQC reports of each of the fastq files. You can open them with the web browser by clicking on them with the mouse, or by running 'firefox *.html'.
 
-**QUESTION**: Can you see differences between the different sequencing technologies?
+**Exercise 10**: Can you see differences between the different sequencing technologies?
 <details><summary>Click Here to see the answer</summary>
 Illumina machines generate shorter reads, all with the same length. Pacbio and nanopore generate (much) longer reads, with diverse read lengths, and of a poorer quality. Illumina generates many more reads, making both technologies complementary to each other (this will become clearer when we look at specific applications). Finally, you can also notice that, independently of the technology, the quality of base quality tends to decrease along the length of the read.
 </details>
 <br/>
 
 
-**QUESTION**: What is the major difference between the two paired fastq files of the paired_example?
+**Exercise 11**: What is the major difference between the two paired fastq files of the paired_example?
 <details><summary>Click Here to see the answer</summary>
 The reverse read has poorer quality bases. This is usually the case, at least for illumina. This is because the reverse reads are generated after the forward reads.
 </details>
@@ -128,18 +123,20 @@ The reverse read has poorer quality bases. This is usually the case, at least fo
 <br/>
 <br/>
 
+> Filtering and Trimming
+
 ### <a id="LO2.3">2.3 - Filtering and Trimming</a>
 
 As you may have noticed before, reads tend to lose quality towards their end, where there is a higher probability of erroneous bases being called. To avoid problems in subsequent analysis, you should remove bases with higher probability of error, usually by trimming poor quality bases from the end.
 
-**TASK**: Manually remove the bases with Q<30 from the 3' end of the read you analysed before.
+**Exercise 12**: Manually remove the bases with Q<30 from the 3' end of the read you analysed before.
 
 	@SRR022885.1 BI:080102_SL-XAR_0001_FC201E9AAXX:6:1:752:593/1
 	CGTACCAATTATTCAACGTCGCCAGTTGCTTCATGT
 	+
 	IIIIIIIIII>IIIIIII@IIII.I+I>35I0I&+/
 
-**QUESTION**: How is the read after this trimming operation?
+**Exercise 13**: How is the read after this trimming operation?
 <details><summary>Click Here to see the answer</summary>
 
 	@SRR022885.1 BI:080102_SL-XAR_0001_FC201E9AAXX:6:1:752:593/1
@@ -151,7 +148,7 @@ As you may have noticed before, reads tend to lose quality towards their end, wh
 <br/>
 
 
-**QUESTION**: Did you remove all lower quality bases from the read? What other strategies you can imagine to filter your reads?
+**Exercise 14**: Did you remove all lower quality bases from the read? What other strategies you can imagine to filter your reads?
 <details><summary>Click Here to see the answer</summary>
 
 	* No. There are still low quality bases in the read (NOTE: this does not mean the base is wrong, just that it is more likely to be wrong). 
@@ -161,7 +158,7 @@ As you may have noticed before, reads tend to lose quality towards their end, wh
 </details>
 <br/>
 
-**QUESTION**: Can you remove bases in the middle of reads? Why?
+**Exercise 15**: Can you remove bases in the middle of reads? Why?
 <details><summary>Click Here to see the answer</summary>
 	**NO!** Because you would be making artificial deletions in the sequence.
 </details>
@@ -169,29 +166,19 @@ As you may have noticed before, reads tend to lose quality towards their end, wh
 	
 Like you have FastQC to automatically produce plots from fastq files, you also have software to filter low quality bases from fastq files. [Seqtk](https://github.com/lh3/seqtk) is a very simple tool that you can use to perform this filtering. 
 
-**TASK**: In a terminal, go to folder fastq_examples. Type 'seqtk trimfq -q 0.01 MiSeq_250bp.fastq.gz > MiSeq_250bp.trimmed.fastq'. 
+**Exercise 16**: In a terminal, go to folder fastq_examples. Type 'seqtk trimfq -q 0.01 MiSeq_250bp.fastq.gz > MiSeq_250bp.trimmed.fastq'. 
 
-**QUESTION**: What is this command doing? Use fastQC to check the new fastq file that is created by this command. 
+**Exercise 17**: What is this command doing? Use fastQC to check the new fastq file that is created by this command. 
 <details><summary>Click Here to see the answer</summary>
 	Seqtk removes bad quality bases from the ends of reads. In this case, it removes bases with a probability of error greater than 1% (0.01), corresponding to Q<20.
 </details>
 <br/>
 
-Most software for the analysis of HTS data is freely available to users. Nonetheless, they often require the use of the command line in a Unix-like environment (seqtk is one such case). User-friendly desktop software such as [CLC](https://www.qiagenbioinformatics.com/products/clc-genomics-workbench/) or [Ugene](http://ugene.net/) is available, but given the quick pace of developmpent in this area, they are constantly outdated. Moreover, even with better algorithms, HTS analysis must often be run in external servers due to the heavy computational requirements. One popular tool is [Galaxy](https://galaxyproject.org/), which allows even non-expert users to execute many different HTS analysis programs through a simple web interface.
-
-**TASK**: Let's use Galaxy to run some bioinformatic tools. Open the web browser (eg. Firefox). Type [localhost:8080](localhost:8080) in the URL tab (where you put the web addresses). This means that you are accessing a galaxy instance that is running on your local machine. You should see the Galaxy interface on your web browser. Click on the upload icon on the top left of the interface. Upload into Galaxy the files MiSeq_76bp.fastq.gz and MiSeq_250bp.fastq.gz. You should now seem them on your history in the right panel. You can visualize their content by pressing the view data icon (the eye icon). After you have your data, you're ready to run some tools on your data. The tools are listed on the left panel. Search for fastqc on the tool search bar on the left panel. By clicking on the tool you should have in the middle the interface to run fastQC. To run fastc you just need to select the fastq file and press "Execute". Run fastqc on the fastq files you uploaded and see the result. Still in galaxy again, search for and run "seqtk trimfq" on the file MiSeq_250bp.fastq with the same parameters as you used in the command line. 
-
-As we saw before, sequencing machines (namely, the illumina ones) require that you add specific sequences (adaptors) to your DNA so that it can be sequenced. For many different reasons, such sequences may end up in your read, and you need to remove these artifacts from your sequences.
-
-**QUESTION**: How can adaptors appear in your sequences? Take the sample MiSeq_76bp.fastq.gz as an example. 
-<details><summary>Click Here to see the answer</summary>
-	When the fragment being read is smaller than the number of bases the sequencing machine reads, then it will start reading the bases of the adaptor that is attached to all fragments so they can be read by the machines. In the case of MiSeq_76bp, the fragments were all 36bp, and since 76bp were being read, the remaining bases belong to the illumina adaptor that was used.
-</details>
-<br/>
+Most software for the analysis of HTS data is freely available to users. Nonetheless, they often require the use of the command line in a Unix-like environment (seqtk is one such case). User-friendly desktop software such as [CLC](https://www.qiagenbioinformatics.com/products/clc-genomics-workbench/) or [Ugene](http://ugene.net/) is available, but given the quick pace of development in this area, they are constantly outdated. Moreover, even with better algorithms, HTS analysis must often be run in external servers due to the heavy computational requirements. One popular tool is [Galaxy](https://galaxyproject.org/), which allows even non-expert users to execute many different HTS analysis programs through a simple web interface.
 
 There are many programs to remove adaptors from your sequences, such as [cutadapt](https://cutadapt.readthedocs.org/en/stable/). To use them you need to know the adaptors that were used in your library preparation (eg. Illumina TruSeq). For this you need to ask the sequencing center that generated your data.
 
-**TASK**: In Galaxy, use cutadapt to remove adaptors from MiSeq_76bp.fastq.gz. In this sample, we know that we used the illumina adaptor GTGACTGGAGTTCAGACGTGTGCTCT# NGS - Exercises
+
 
 
 
