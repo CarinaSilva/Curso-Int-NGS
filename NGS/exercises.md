@@ -1,4 +1,4 @@
-g# Exercises
+# Exercises
 
 > ## FASTQ files
 
