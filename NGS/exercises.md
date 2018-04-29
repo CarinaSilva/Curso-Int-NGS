@@ -117,8 +117,10 @@ Like you have FastQC to automatically produce plots from fastq files, you also h
 **Exercise 9**: In a terminal, go to folder fastq_examples. Type 'seqtk trimfq -q 0.01 MiSeq_250bp.fastq.gz > MiSeq_250bp.trimmed.fastq'. 
 
 **Exercise 10**: What is this command doing? Use fastQC to check the new fastq file that is created by this command. 
+
 <details><summary>Click Here to see the answer</summary>
 	Seqtk removes bad quality bases from the ends of reads. In this case, it removes bases with a probability of error greater than 1% (0.01), corresponding to Q<20.
+	
 </p></details>
 <br/>
 
