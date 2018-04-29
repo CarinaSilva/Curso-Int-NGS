@@ -137,8 +137,39 @@ As we saw before, sequencing machines (namely, the illumina ones) require that y
 
 There are many programs to remove adaptors from your sequences, such as [cutadapt](https://cutadapt.readthedocs.org/en/stable/). To use them you need to know the adaptors that were used in your library preparation (eg. Illumina TruSeq). For this you need to ask the sequencing center that generated your data.
 
+**Exercise 12**
+ In MiSeq_76bp.fastq.gz sample, we know that we used the illumina adaptor GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT, so try to remove this from the 3' end of reads and see the impact of the procedure using FastQC.
+ 
+```{r}
+# unzip the file MiSeq_76bp.fastq.gz 
 
+gunzip MiSeq_76bp.fastq.gz
 
+# count the number of times the sequence matches
 
+grep "GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT" MiSeq_76bp.fastq |wc -l
+
+```
+Do the sequences appear systematically at the beginning or at the end of the reads?
+
+But the adapters could also appear in the reverse, complementary or reverse complementary mode.
+
+Compute the reverse, complementary and the reverse complementary sequences of the two adapters, and find out which of them appear in your data.
+
+To compute those sequences you can use some online resources as the one in:
+http://www.bioinformatics.org/sms/rev_comp.html
+
+<details><summary>Click Here to see the answer</summary>
+	
+```{r}
+
+# count the number of times the sequence matches
+
+grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.fastq |wc -l
+
+```
+	
+</p></details>
+<br/>
 
 
