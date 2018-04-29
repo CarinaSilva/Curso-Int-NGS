@@ -145,6 +145,10 @@ There are many programs to remove adaptors from your sequences, such as [cutadap
 
 gunzip MiSeq_76bp.fastq.gz
 
+#find if the adaptor is in the sequence
+grep "GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT" MiSeq_76bp.fastq
+
+
 # count the number of times the sequence matches
 
 grep "GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT" MiSeq_76bp.fastq |wc -l
@@ -162,6 +166,9 @@ http://www.bioinformatics.org/sms/rev_comp.html
 <details><summary>Click Here to see the answer</summary>
 	
 ```{r}
+# find if the adaptor is in the sequence
+
+grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.fastq
 
 # count the number of times the sequence matches
 
@@ -172,4 +179,22 @@ grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.fastq |wc -l
 </p></details>
 <br/>
 
+### Use cutadapt to make an adapter trimming of the reads.
 
+Check the options:
+
+    -a for adapter to the 3’ end.
+    -g for adapter to the 5’ end.
+
+you can find the help of the program typing "cutadapt -h" in the shell.
+
+```{r}
+cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -o MiSeq_76bp.trim.fastq MiSeq_76bp.fastq
+cutadapt -g AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -o MiSeq_76bp.trim2.fastq MiSeq_76bp.trim.fastq
+
+# grep the new files 
+grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.trim.fastq |wc -l
+grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.trim2.fastq |wc -l
+
+
+```
