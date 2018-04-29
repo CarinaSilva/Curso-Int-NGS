@@ -65,7 +65,7 @@ The read identifiers are the same, in the same order (though the sequences are n
 <br/>
 
 
-> ## Quality Control (QC)
+> ## 2 Quality Control (QC)
 
 ### <a id="LO2.2">2.2 - Quality Check of FastQ data</a>
 
