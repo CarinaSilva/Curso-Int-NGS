@@ -197,3 +197,10 @@ grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.trim.fastq |wc -l
 grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.trim2.fastq |wc -l
 
 ```
+
+
+> ## Alignment
+
+Escherichia coli str. K-12 substr. MG1655, complete genome
+
+NCBI Reference Sequence: NC_000913.3
