@@ -56,7 +56,8 @@ wc -l paired_end_example_1.fastq
 ```
 
 <details><summary>Click Here to see the answer</summary><p>
-	
+
+
 The read identifiers are the same, in the same order (though the sequences are not). This is because they are readings of the same fragment, one (_1) in the forward and another (_2) in the reverse direction. Often the indication of forward and reverse is in the identifier itself.
 
 </p></details>
@@ -97,9 +98,12 @@ The MiSeq_250bp fastq file contains 10000 reads of 250bp, while the MiSeq_76bp c
 
 
 **Exercise 8**: What is the major difference between the two paired fastq files of the paired_example?
+
 <details><summary>Click Here to see the answer</summary>
+	
 The reverse read has poorer quality bases. This is usually the case, at least for illumina. This is because the reverse reads are generated after the forward reads.
-</details>
+
+</p></details>
 <br/>
 <br/>
 <br/>
@@ -125,7 +129,7 @@ As you may have noticed before, reads tend to lose quality towards their end, wh
 	+
 	IIIIIIIIII>IIIIIII@IIII.I+I>35I0I
 
-</details>
+</p></details>
 <br/>
 
 
@@ -142,7 +146,7 @@ As you may have noticed before, reads tend to lose quality towards their end, wh
 **Exercise 12**: Can you remove bases in the middle of reads? Why?
 <details><summary>Click Here to see the answer</summary>
 	**NO!** Because you would be making artificial deletions in the sequence.
-</details>
+</p></details>
 <br/>
 	
 Like you have FastQC to automatically produce plots from fastq files, you also have software to filter low quality bases from fastq files. [Seqtk](https://github.com/lh3/seqtk) is a very simple tool that you can use to perform this filtering. 
@@ -152,7 +156,7 @@ Like you have FastQC to automatically produce plots from fastq files, you also h
 **Exercise 15**: What is this command doing? Use fastQC to check the new fastq file that is created by this command. 
 <details><summary>Click Here to see the answer</summary>
 	Seqtk removes bad quality bases from the ends of reads. In this case, it removes bases with a probability of error greater than 1% (0.01), corresponding to Q<20.
-</details>
+</p></details>
 <br/>
 
 Most software for the analysis of HTS data is freely available to users. Nonetheless, they often require the use of the command line in a Unix-like environment (seqtk is one such case). User-friendly desktop software such as [CLC](https://www.qiagenbioinformatics.com/products/clc-genomics-workbench/) or [Ugene](http://ugene.net/) is available, but given the quick pace of development in this area, they are constantly outdated. Moreover, even with better algorithms, HTS analysis must often be run in external servers due to the heavy computational requirements. One popular tool is [Galaxy](https://galaxyproject.org/), which allows even non-expert users to execute many different HTS analysis programs through a simple web interface.
