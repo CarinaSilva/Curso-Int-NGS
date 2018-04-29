@@ -77,36 +77,17 @@ Other plots indicate biases in nucleotidic content of reads, either globally (su
 
 
 
-**NOTE**: Given the size of fastq files (usually in the order of Gb), they are most frequently compressed as fastq.gz files. In fact, most tools (such as FastQC) work directly with fastq.gz to reduce space.
 
 **Exercise 6**: Open a terminal. type 'fastqc' and press enter. The graphical interface of FastQC should appear. Open the file MiSeq_76bp.fastq.gz inside of the folder files. Look at the different plots you obtained. Next, open the file MiSeq_250bp.fastq.gz.
 
-**Exercise 7**: What information is in a FastQC report?
-<details><summary>Click Here to see the answer</summary>
+**NOTE**: Given the size of fastq files (usually in the order of Gb), they are most frequently compressed as fastq.gz files. In fact, most tools (such as FastQC) work directly with fastq.gz to reduce space.
 
-A FastQC report includes, among other things:  
 
-  * Basic statistics of the fastq file, including number of reads and sequence length
-  
-  * Per base sequence quality, displaying the boxplot distribution of the Phred Quality (Q) per base for all reads.
-  
-  * Per sequence quality scores displaying the histogram of the mean quality (Q value) of the bases of each read, for all reads
-  
-  * Per base sequence content, displaying the frequency of each nucleotide at each position of the read
-  
-  * Per sequence GC content displaying the histogram of the GC frequency of each read, for all reads
-  
-  * Sequence length distribution displaying the histogram of read lengths
-  
-  * Sequence duplication levels displaying the histograms of the number of times reads appear with exactly the same sequence
-  
-  * Overrepresented sequences (not necessarily complete reads) that appear more frequently than randomly expected
-  
-  * Adapter content indicaring the frequency of sequences of know sequencing adaptors along the length of the reads
-  
-</details><br/>
+<br/>
+<br/>
+<br/>
 
-**Exercise 8**: What are the main differences between the reports of both fastq files?
+**Exercise 7**: What are the main differences between the reports of both fastq files?
 <details><summary>Click Here to see the answer</summary>
 The MiSeq_250bp fastq file contains 10000 reads of 250bp, while the MiSeq_76bp contains 1000 reads of 76bp. The MiSeq_250bp reads have a lower per base sequence quality at their end, while the reads of the MiSeq_76bp keep a good quality throughout. The MiSeq_76bp reads contain a very noticeable nucleotide positional bias particularly after position 36. MiSeq_250bp also contain a bit of nucleotide positional bias, but less and only for the first 10bp. The MiSeq_250bp reads display an apparently bimodal GC distribution, while the MiSeq_76bp reads seem closer to a single normal distribution. Finally, MiSeq_76bp contain a clear presence of a known Illumina adaptor after position 36 (probably the reason for the nucleotide positional bias we saw before), while MiSeq_250bp contain a much smaller frequency of another Illumina adaptor towards the ends of the reads.
 </details>
@@ -114,7 +95,7 @@ The MiSeq_250bp fastq file contains 10000 reads of 250bp, while the MiSeq_76bp c
 
 
 
-**Exercise 9**: What is the major difference between the two paired fastq files of the paired_example?
+**Exercise 8**: What is the major difference between the two paired fastq files of the paired_example?
 <details><summary>Click Here to see the answer</summary>
 The reverse read has poorer quality bases. This is usually the case, at least for illumina. This is because the reverse reads are generated after the forward reads.
 </details>
