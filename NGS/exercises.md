@@ -112,56 +112,18 @@ The reverse read has poorer quality bases. This is usually the case, at least fo
 > ## Filtering and Trimming
 
 
-As you may have noticed before, reads tend to lose quality towards their end, where there is a higher probability of erroneous bases being called. To avoid problems in subsequent analysis, you should remove bases with higher probability of error, usually by trimming poor quality bases from the end.
-
-**Exercise 9**: Manually remove the bases with Q<30 from the 3' end of the read you analysed before.
-
-	@SRR022885.1 BI:080102_SL-XAR_0001_FC201E9AAXX:6:1:752:593/1
-	CGTACCAATTATTCAACGTCGCCAGTTGCTTCATGT
-	+
-	IIIIIIIIII>IIIIIII@IIII.I+I>35I0I&+/
-
-**Exercise 10**: How is the read after this trimming operation?
-<details><summary>Click Here to see the answer</summary>
-
-	@SRR022885.1 BI:080102_SL-XAR_0001_FC201E9AAXX:6:1:752:593/1
-	CGTACCAATTATTCAACGTCGCCAGTTGCTTCA
-	+
-	IIIIIIIIII>IIIIIII@IIII.I+I>35I0I
-
-</p></details>
-<br/>
-
-
-**Exercise 11**: Did you remove all lower quality bases from the read? What other strategies you can imagine to filter your reads?
-<details><summary>Click Here to see the answer</summary>
-
-	* No. There are still low quality bases in the read (NOTE: this does not mean the base is wrong, just that it is more likely to be wrong). 
-	
-	* Instead of looking only at the last base, one can look at the mean quality of the k (eg. k=4) last bases to decide if a base should be removed or not. Another alternative that is often used is to find the longest continuous stretch of bases with a quality above a certain value.
-	
-</details>
-<br/>
-
-**Exercise 12**: Can you remove bases in the middle of reads? Why?
-<details><summary>Click Here to see the answer</summary>
-	**NO!** Because you would be making artificial deletions in the sequence.
-</p></details>
-<br/>
-	
 Like you have FastQC to automatically produce plots from fastq files, you also have software to filter low quality bases from fastq files. [Seqtk](https://github.com/lh3/seqtk) is a very simple tool that you can use to perform this filtering. 
 
-**Exercise 14**: In a terminal, go to folder fastq_examples. Type 'seqtk trimfq -q 0.01 MiSeq_250bp.fastq.gz > MiSeq_250bp.trimmed.fastq'. 
+**Exercise 9**: In a terminal, go to folder fastq_examples. Type 'seqtk trimfq -q 0.01 MiSeq_250bp.fastq.gz > MiSeq_250bp.trimmed.fastq'. 
 
-**Exercise 15**: What is this command doing? Use fastQC to check the new fastq file that is created by this command. 
+**Exercise 10**: What is this command doing? Use fastQC to check the new fastq file that is created by this command. 
 <details><summary>Click Here to see the answer</summary>
 	Seqtk removes bad quality bases from the ends of reads. In this case, it removes bases with a probability of error greater than 1% (0.01), corresponding to Q<20.
 </p></details>
 <br/>
 
-Most software for the analysis of HTS data is freely available to users. Nonetheless, they often require the use of the command line in a Unix-like environment (seqtk is one such case). User-friendly desktop software such as [CLC](https://www.qiagenbioinformatics.com/products/clc-genomics-workbench/) or [Ugene](http://ugene.net/) is available, but given the quick pace of development in this area, they are constantly outdated. Moreover, even with better algorithms, HTS analysis must often be run in external servers due to the heavy computational requirements. One popular tool is [Galaxy](https://galaxyproject.org/), which allows even non-expert users to execute many different HTS analysis programs through a simple web interface.
 
-There are many programs to remove adaptors from your sequences, such as [cutadapt](https://cutadapt.readthedocs.org/en/stable/). To use them you need to know the adaptors that were used in your library preparation (eg. Illumina TruSeq). For this you need to ask the sequencing center that generated your data.
+
 
 
 
