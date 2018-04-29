@@ -64,6 +64,7 @@ The read identifiers are the same, in the same order (though the sequences are n
 <br/>
 <br/>
 
+
 > ## Quality Control (QC)
 
 ### <a id="LO2.2">2.2 - Quality Check of FastQ data</a>
@@ -78,20 +79,23 @@ Other plots indicate biases in nucleotidic content of reads, either globally (su
 
 
 
-**Exercise 6**: Open a terminal. type 'fastqc' and press enter. The graphical interface of FastQC should appear. Open the file MiSeq_76bp.fastq.gz inside of the folder files. Look at the different plots you obtained. Next, open the file MiSeq_250bp.fastq.gz.
+**Exercise 6**: Open a terminal. Type 'fastqc' and press enter. The graphical interface of FastQC should appear. Open the file MiSeq_76bp.fastq.gz inside of the folder files. Look at the different plots you obtained. Next, open the file MiSeq_250bp.fastq.gz.
 
 **NOTE**: Given the size of fastq files (usually in the order of Gb), they are most frequently compressed as fastq.gz files. In fact, most tools (such as FastQC) work directly with fastq.gz to reduce space.
 
 
 <br/>
-<br/>
-<br/>
+
 
 **Exercise 7**: What are the main differences between the reports of both fastq files?
+
 <details><summary>Click Here to see the answer</summary>
+	
 The MiSeq_250bp fastq file contains 10000 reads of 250bp, while the MiSeq_76bp contains 1000 reads of 76bp. The MiSeq_250bp reads have a lower per base sequence quality at their end, while the reads of the MiSeq_76bp keep a good quality throughout. The MiSeq_76bp reads contain a very noticeable nucleotide positional bias particularly after position 36. MiSeq_250bp also contain a bit of nucleotide positional bias, but less and only for the first 10bp. The MiSeq_250bp reads display an apparently bimodal GC distribution, while the MiSeq_76bp reads seem closer to a single normal distribution. Finally, MiSeq_76bp contain a clear presence of a known Illumina adaptor after position 36 (probably the reason for the nucleotide positional bias we saw before), while MiSeq_250bp contain a much smaller frequency of another Illumina adaptor towards the ends of the reads.
-</details>
+
+</p></details>
 <br/>
+
 
 
 
@@ -109,14 +113,14 @@ The reverse read has poorer quality bases. This is usually the case, at least fo
 
 As you may have noticed before, reads tend to lose quality towards their end, where there is a higher probability of erroneous bases being called. To avoid problems in subsequent analysis, you should remove bases with higher probability of error, usually by trimming poor quality bases from the end.
 
-**Exercise 10**: Manually remove the bases with Q<30 from the 3' end of the read you analysed before.
+**Exercise 9**: Manually remove the bases with Q<30 from the 3' end of the read you analysed before.
 
 	@SRR022885.1 BI:080102_SL-XAR_0001_FC201E9AAXX:6:1:752:593/1
 	CGTACCAATTATTCAACGTCGCCAGTTGCTTCATGT
 	+
 	IIIIIIIIII>IIIIIII@IIII.I+I>35I0I&+/
 
-**Exercise 11**: How is the read after this trimming operation?
+**Exercise 10**: How is the read after this trimming operation?
 <details><summary>Click Here to see the answer</summary>
 
 	@SRR022885.1 BI:080102_SL-XAR_0001_FC201E9AAXX:6:1:752:593/1
@@ -128,7 +132,7 @@ As you may have noticed before, reads tend to lose quality towards their end, wh
 <br/>
 
 
-**Exercise 12**: Did you remove all lower quality bases from the read? What other strategies you can imagine to filter your reads?
+**Exercise 11**: Did you remove all lower quality bases from the read? What other strategies you can imagine to filter your reads?
 <details><summary>Click Here to see the answer</summary>
 
 	* No. There are still low quality bases in the read (NOTE: this does not mean the base is wrong, just that it is more likely to be wrong). 
@@ -138,7 +142,7 @@ As you may have noticed before, reads tend to lose quality towards their end, wh
 </details>
 <br/>
 
-**Exercise 13**: Can you remove bases in the middle of reads? Why?
+**Exercise 12**: Can you remove bases in the middle of reads? Why?
 <details><summary>Click Here to see the answer</summary>
 	**NO!** Because you would be making artificial deletions in the sequence.
 </details>
