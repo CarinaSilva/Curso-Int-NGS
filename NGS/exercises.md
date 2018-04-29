@@ -1,4 +1,4 @@
-# Exercises
+g# Exercises
 
 > ## FASTQ files
 
@@ -44,14 +44,17 @@ Create an empty  directory to work in the exercise and copy or download the raw 
 
 mkdir quality_control
 cd quality_control
-unzip paired_end_example_1.fastq.gz  paired_end_example_2.fastq.gz
+gunzip paired_end_example_1.fastq.gz  
+gunzip paired_end_example_2.fastq.gz
 
 # Use the command head to have a view of the first lines of the file
 
 head paired_end_example_1.fastq.gz
 
-```
+# Use the command wc to count how many reads are in the file (remember you have to divide by 4)
 
+wc -l paired_end_example_1.fastq
+```
 
 <details><summary>Click Here to see the answer</summary><p>
 	
@@ -109,16 +112,9 @@ The MiSeq_250bp fastq file contains 10000 reads of 250bp, while the MiSeq_76bp c
 </details>
 <br/>
 
-**Exercise 9**: Insider the folder fastq_examples, you can see fastq files from differente sequencing technologies or applications. In a terminal window, go to the folder fastq_examples. Type 'fastqc *.fastq.gz' and press enter. Inside the folder, you should now see a series of html files with FastQC reports of each of the fastq files. You can open them with the web browser by clicking on them with the mouse, or by running 'firefox *.html'.
-
-**Exercise 10**: Can you see differences between the different sequencing technologies?
-<details><summary>Click Here to see the answer</summary>
-Illumina machines generate shorter reads, all with the same length. Pacbio and nanopore generate (much) longer reads, with diverse read lengths, and of a poorer quality. Illumina generates many more reads, making both technologies complementary to each other (this will become clearer when we look at specific applications). Finally, you can also notice that, independently of the technology, the quality of base quality tends to decrease along the length of the read.
-</details>
-<br/>
 
 
-**Exercise 11**: What is the major difference between the two paired fastq files of the paired_example?
+**Exercise 9**: What is the major difference between the two paired fastq files of the paired_example?
 <details><summary>Click Here to see the answer</summary>
 The reverse read has poorer quality bases. This is usually the case, at least for illumina. This is because the reverse reads are generated after the forward reads.
 </details>
@@ -126,30 +122,20 @@ The reverse read has poorer quality bases. This is usually the case, at least fo
 <br/>
 <br/>
 
-**NOTE**: Turn on the green light when you're finished. Assess how well you achieve the learning outcome. For this, see how well you responded to the different questions during the activities and also make the following questions to yourself.
 
-* Could you run FastQC on a fastq file?
+> ## Filtering and Trimming
 
-* Can you broadly list types of information that a FastQC report contains?
-
-* Can you interpret information in a FastQC report to detect potential issues with data in a fastq file?
-<br/>
-<br/>
-
-> Filtering and Trimming
-
-### <a id="LO2.3">2.3 - Filtering and Trimming</a>
 
 As you may have noticed before, reads tend to lose quality towards their end, where there is a higher probability of erroneous bases being called. To avoid problems in subsequent analysis, you should remove bases with higher probability of error, usually by trimming poor quality bases from the end.
 
-**Exercise 12**: Manually remove the bases with Q<30 from the 3' end of the read you analysed before.
+**Exercise 10**: Manually remove the bases with Q<30 from the 3' end of the read you analysed before.
 
 	@SRR022885.1 BI:080102_SL-XAR_0001_FC201E9AAXX:6:1:752:593/1
 	CGTACCAATTATTCAACGTCGCCAGTTGCTTCATGT
 	+
 	IIIIIIIIII>IIIIIII@IIII.I+I>35I0I&+/
 
-**Exercise 13**: How is the read after this trimming operation?
+**Exercise 11**: How is the read after this trimming operation?
 <details><summary>Click Here to see the answer</summary>
 
 	@SRR022885.1 BI:080102_SL-XAR_0001_FC201E9AAXX:6:1:752:593/1
@@ -161,7 +147,7 @@ As you may have noticed before, reads tend to lose quality towards their end, wh
 <br/>
 
 
-**Exercise 14**: Did you remove all lower quality bases from the read? What other strategies you can imagine to filter your reads?
+**Exercise 12**: Did you remove all lower quality bases from the read? What other strategies you can imagine to filter your reads?
 <details><summary>Click Here to see the answer</summary>
 
 	* No. There are still low quality bases in the read (NOTE: this does not mean the base is wrong, just that it is more likely to be wrong). 
@@ -171,7 +157,7 @@ As you may have noticed before, reads tend to lose quality towards their end, wh
 </details>
 <br/>
 
-**Exercise 15**: Can you remove bases in the middle of reads? Why?
+**Exercise 13**: Can you remove bases in the middle of reads? Why?
 <details><summary>Click Here to see the answer</summary>
 	**NO!** Because you would be making artificial deletions in the sequence.
 </details>
@@ -179,9 +165,9 @@ As you may have noticed before, reads tend to lose quality towards their end, wh
 	
 Like you have FastQC to automatically produce plots from fastq files, you also have software to filter low quality bases from fastq files. [Seqtk](https://github.com/lh3/seqtk) is a very simple tool that you can use to perform this filtering. 
 
-**Exercise 16**: In a terminal, go to folder fastq_examples. Type 'seqtk trimfq -q 0.01 MiSeq_250bp.fastq.gz > MiSeq_250bp.trimmed.fastq'. 
+**Exercise 14**: In a terminal, go to folder fastq_examples. Type 'seqtk trimfq -q 0.01 MiSeq_250bp.fastq.gz > MiSeq_250bp.trimmed.fastq'. 
 
-**Exercise 17**: What is this command doing? Use fastQC to check the new fastq file that is created by this command. 
+**Exercise 15**: What is this command doing? Use fastQC to check the new fastq file that is created by this command. 
 <details><summary>Click Here to see the answer</summary>
 	Seqtk removes bad quality bases from the ends of reads. In this case, it removes bases with a probability of error greater than 1% (0.01), corresponding to Q<20.
 </details>
