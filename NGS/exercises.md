@@ -196,5 +196,4 @@ cutadapt -g AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -o MiSeq_76bp.trim2.fastq MiSeq_7
 grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.trim.fastq |wc -l
 grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.trim2.fastq |wc -l
 
-
 ```
