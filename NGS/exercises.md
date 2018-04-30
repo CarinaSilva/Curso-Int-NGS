@@ -186,7 +186,7 @@ Check the options:
     -a for adapter to the 3’ end.
     -g for adapter to the 5’ end.
 
-you can find the help of the program typing "cutadapt -h" in the shell.
+you can find  help of the program typing "cutadapt -h" in the shell.
 
 ```{r}
 cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -o MiSeq_76bp.trim.fastq MiSeq_76bp.fastq
@@ -197,14 +197,17 @@ grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.trim.fastq |wc -l
 grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.trim2.fastq |wc -l
 
 ```
-
+Do a FastQC of the new trimmed files.
 
 > ## Alignment
 After obtaining millions of short reads, we need to align them to a (sometimes large) reference genome. To achieve this, novel, more efficient, alignment methods had to be developed. One popular method is based on the [burrows-wheeler transform](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform) and the use of efficient data structures, of which [bwa](http://bio-bwa.sourceforge.net/) and [bowtie](http://bowtie-bio.sourceforge.net/index.shtml) are examples. They enable alignment of millions of reads in a few minutes, even in a laptop.
 
-**NOTE:** Aligners based on the burrows-wheeler transform makes some assumptions to speed up the alignment process. Namely, they require the reference genome to be very similar to your sequenced DNA (less than 2-5% differences). Moreover, they are not optimal, and therefore sometimes make some mistakes.
+**Exercise 13** The first step is to make an index from the fasta of the reference genome. Download the reference sequence from [here](https://www.ncbi.nlm.nih.gov/nuccore/556503834). The data is from [The First Steps on Adaptation of Escherichia coli to the Gut are dominated by soft Sweeps](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004182).
+Dowload the paired end (two separate input files)
 
-**TASK** The first step of a burrows-wheeler aligner is to make an index from the fasta of the reference genome. open a terminal window, go to the folder resequencing (using the 'cd' command) and type 'bwa index NC_000913.3_MG1655.fasta'. Now, we can do the alignment against the created database. Next, type 'bwa mem NC_000913.3_MG1655.fasta SRR1030347_1.fastq.interval.fq SRR1030347_2.fastq.interval.fq > SRR1030347.alignment.sam'. 
+
+
+Open a terminal window, go to the folder resequencing (using the 'cd' command) and type 'bwa index NC_000913.3_MG1655.fasta'. Now, we can do the alignment against the created database. Next, type 'bwa mem NC_000913.3_MG1655.fasta SRR1030347_1.fastq.interval.fq SRR1030347_2.fastq.interval.fq > SRR1030347.alignment.sam'. 
 
 **NOTE:** You may have noticed that we used paired fastq files in this alignment. The aligners can use the pairing information to improve the alignments, as we will see later.
 
