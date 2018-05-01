@@ -199,17 +199,32 @@ grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC" MiSeq_76bp.trim2.fastq |wc -l
 ```
 Do a FastQC of the new trimmed files.
 
+<br/>
+
+
 > ## Alignment
 After obtaining millions of short reads, we need to align them to a (sometimes large) reference genome. To achieve this, novel, more efficient, alignment methods had to be developed. One popular method is based on the [burrows-wheeler transform](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform) and the use of efficient data structures, of which [bwa](http://bio-bwa.sourceforge.net/) and [bowtie](http://bowtie-bio.sourceforge.net/index.shtml) are examples. They enable alignment of millions of reads in a few minutes, even in a laptop.
+
+<br/>
+
+
+    + BWA : BWA is a software package for mapping DNA low-divergent sequences against a large reference genome, such as the human genome. The new project repository is available at GitHub BWA
+    + HPG Aligner : HPG Aligner is a new NGS aligner for mapping both DNA Genomic and RNA-seq data against a large reference genome. It’s has been designed for having a high sensitivity and performance.
+    + Bowtie2 : Bowtie 2 is an ultrafast and memory-efficient tool for aligning DNA sequencing reads to long reference sequences.
+    + TopHat2 : TopHat is a fast splice junction mapper for RNA-Seq reads. It aligns RNA-Seq reads to mammalian-sized genomes using the ultra high-throughput short read aligner Bowtie, and then analyzes the mapping results to identify splice junctions between exons.
+    + STAR : STAR aligns RNA-seq reads to a reference genome using uncompressed suffix arrays.
+
+
+
+
+
+
 
 **Exercise 13** The first step is to make an index from the fasta of the reference genome. Download the reference sequence from [here](https://www.ncbi.nlm.nih.gov/nuccore/556503834). The data is from [The First Steps on Adaptation of Escherichia coli to the Gut are dominated by soft Sweeps](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004182).
 Dowload the paired end (two separate input files)
 
 
 
-Open a terminal window, go to the folder resequencing (using the 'cd' command) and type 'bwa index NC_000913.3_MG1655.fasta'. Now, we can do the alignment against the created database. Next, type 'bwa mem NC_000913.3_MG1655.fasta SRR1030347_1.fastq.interval.fq SRR1030347_2.fastq.interval.fq > SRR1030347.alignment.sam'. 
-
-**NOTE:** You may have noticed that we used paired fastq files in this alignment. The aligners can use the pairing information to improve the alignments, as we will see later.
 
 
 ### <a id="LO3.2">3.2 - The SAM/BAM alignment format</a>
