@@ -120,6 +120,7 @@ Like you have FastQC to automatically produce plots from fastq files, you also h
 **Exercise 10**: What is this command doing? Use fastQC to check the new fastq file that is created by this command. 
 
 <details><summary>Click Here to see the answer</summary>
+	
 	Seqtk removes bad quality bases from the ends of reads. In this case, it removes bases with a probability of error greater than 1% (0.01), corresponding to Q<20.
 	
 </p></details>
@@ -128,14 +129,19 @@ Like you have FastQC to automatically produce plots from fastq files, you also h
 
 As we saw before, sequencing machines (namely, the illumina ones) require that you add specific sequences (adaptors) to your DNA so that it can be sequenced. For many different reasons, such sequences may end up in your read, and you need to remove these artifacts from your sequences.
 
+<bf/>
 **Exercise 11**: How can adaptors appear in your sequences? Take the sample MiSeq_76bp.fastq.gz as an example. 
 
 <details><summary>Click Here to see the answer</summary>
+	
 	When the fragment being read is smaller than the number of bases the sequencing machine reads, then it will start reading the bases of the adaptor that is attached to all fragments so they can be read by the machines. In the case of MiSeq_76bp, the fragments were all 36bp, and since 76bp were being read, the remaining bases belong to the illumina adaptor that was used.
+	
 </p></details>
 <br/>
 
 There are many programs to remove adaptors from your sequences, such as [cutadapt](https://cutadapt.readthedocs.org/en/stable/). To use them you need to know the adaptors that were used in your library preparation (eg. Illumina TruSeq). For this you need to ask the sequencing center that generated your data.
+
+<br/>
 
 **Exercise 12**
  In MiSeq_76bp.fastq.gz sample, we know that we used the illumina adaptor GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT, so try to remove this from the 3' end of reads and see the impact of the procedure using FastQC.
@@ -216,12 +222,19 @@ After obtaining millions of short reads, we need to align them to a (sometimes l
 
 
 
+<br/>
+
+
+
+**Exercise 13** Create a data folder in your working directory (ex:Alignment) and download the reference genome sequence to be used (human chromosome 21) and simulated datasets from the data folder [alignment] (https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a). For this hands-on we are going to use small DNA simulated from chromosome 21. Notice that the name of the file describe the dataset, ie. dna_chr21_100_hq stands for: DNA type of data from chromosome 21 with 100nt read lengths of high quality. Where hq quality means 0.1% mutations and lq quality 1% mutations. Take a few minutes to understand the file. 
+
+Working with NGS data requires a high-end workstations and time for building the reference genome indexes and alignment. During this tutorial we will work only with chromosome 21 to speed up the runtimes. You can download it from the Ensembl website ftp://ftp.ensembl.org/pub/release-75/fasta/homo_sapiens/dna/ download the chromosome 21 file (Homo_sapiens.GRCh37.75.dna.chromosome.21.fa.gz) and move it from your browser download folder to your data folder.
+
+**NOTE**: For working with the whole reference genome the file to be downloaded is Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz.
 
 
 
 
-**Exercise 13** The first step is to make an index from the fasta of the reference genome. Download the reference sequence from [here](https://www.ncbi.nlm.nih.gov/nuccore/556503834). The data is from [The First Steps on Adaptation of Escherichia coli to the Gut are dominated by soft Sweeps](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004182).
-Dowload the paired end (two separate input files)
 
 
 
