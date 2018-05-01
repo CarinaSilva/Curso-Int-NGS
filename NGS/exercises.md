@@ -1,4 +1,6 @@
-# Exercises
+# Exercises Introduction to NGS Data Anaylis
+
+**Note** The exercises presented in this course are adapted from Daniel Sobral material course @ IGC from the [Git Hub](https://github.com/GTPB/ELB18F) and from the [on line course] (http://www.ngscourse.org/).
 
 > ## FASTQ files
 
@@ -90,6 +92,7 @@ Other plots indicate biases in nucleotidic content of reads, either globally (su
 
 <details><summary>Click Here to see the answer</summary>
 	
+
 The MiSeq_250bp fastq file contains 10000 reads of 250bp, while the MiSeq_76bp contains 1000 reads of 76bp. The MiSeq_250bp reads have a lower per base sequence quality at their end, while the reads of the MiSeq_76bp keep a good quality throughout. The MiSeq_76bp reads contain a very noticeable nucleotide positional bias particularly after position 36. MiSeq_250bp also contain a bit of nucleotide positional bias, but less and only for the first 10bp. The MiSeq_250bp reads display an apparently bimodal GC distribution, while the MiSeq_76bp reads seem closer to a single normal distribution. Finally, MiSeq_76bp contain a clear presence of a known Illumina adaptor after position 36 (probably the reason for the nucleotide positional bias we saw before), while MiSeq_250bp contain a much smaller frequency of another Illumina adaptor towards the ends of the reads.
 
 </p></details>
@@ -130,6 +133,7 @@ Like you have FastQC to automatically produce plots from fastq files, you also h
 As we saw before, sequencing machines (namely, the illumina ones) require that you add specific sequences (adaptors) to your DNA so that it can be sequenced. For many different reasons, such sequences may end up in your read, and you need to remove these artifacts from your sequences.
 
 <bf/>
+
 **Exercise 11**: How can adaptors appear in your sequences? Take the sample MiSeq_76bp.fastq.gz as an example. 
 
 <details><summary>Click Here to see the answer</summary>
@@ -226,65 +230,100 @@ After obtaining millions of short reads, we need to align them to a (sometimes l
 
 
 
-**Exercise 13** Create a data folder in your working directory (ex:Alignment) and download the reference genome sequence to be used (human chromosome 21) and simulated datasets from the data folder [alignment] (https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a). For this hands-on we are going to use small DNA simulated from chromosome 21. Notice that the name of the file describe the dataset, ie. dna_chr21_100_hq stands for: DNA type of data from chromosome 21 with 100nt read lengths of high quality. Where hq quality means 0.1% mutations and lq quality 1% mutations. Take a few minutes to understand the file. 
+**Exercise 13** Create a data folder in your working directory (ex:Alignment) and download the reference genome sequence to be used (human chromosome 21) and simulated datasets from the data folder [alignment](https://www.dropbox.com/sh/4qkqch7gyt888h7/AABD_i9ShwryfAqGeJ0yqqF3a). For this hands-on we are going to use small DNA simulated from chromosome 21 (4 files). Notice that the name of the file describe the dataset, ie. dna_chr21_100_hq stands for: DNA type of data from chromosome 21 with 100pb read lengths of high quality. Where hq quality means 0.1% mutations and lq quality 1% mutations. Take a few minutes to understand the file. 
 
 Working with NGS data requires a high-end workstations and time for building the reference genome indexes and alignment. During this tutorial we will work only with chromosome 21 to speed up the runtimes. You can download it from the Ensembl website ftp://ftp.ensembl.org/pub/release-75/fasta/homo_sapiens/dna/ download the chromosome 21 file (Homo_sapiens.GRCh37.75.dna.chromosome.21.fa.gz) and move it from your browser download folder to your data folder.
 
 **NOTE**: For working with the whole reference genome the file to be downloaded is Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz.
 
+For those with access to high-end nodes clusters you can index and simulated whole genome datasets or download real datasets from this sources: - 1000genomes project - European Nucleotide Archive (ENA) - Sequence Read Archive (SRA).
+
+<br/>
+
+In this exercise we’ll learn how to download, install, build the reference genome index and align in single-end and paired-end mode with the one of the most widely DNA aligners: BWA. But first, create an aligners folder to store the software, and an results folder to store the alignment results, create those folders in your working directory next to data, you can create both folders by executing:
+
+```{r}
+#inside bwa program create a new folder index
+mkdir index
+
+#copy the reference genome to the created folder
+
+#create another folder for the SAM files that you are gone to generate inside your working directory
+
+mkdir results
+
+```
+
+**BAM**
+BWA is probably the most used aligner for DNA. AS the documentation states it consists of three different algorithms: BWA, BWA-SW and BWA-MEM. The first algorithm, which is the oldest, is designed for Illumina sequence reads up to 100bp, while the rest two for longer sequences. BWA-MEM and BWA-SW share similar features such as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it is faster and more accurate. BWA-MEM also has better performance than BWA for 70-100bp Illumina reads.
 
 
+**Build the index**
 
 
+Now you can create the index by executing:
+
+```{r}
+bwa index programs/bwa/index/f000_chr21_ref_genome_sequence.fa 
+
+```
+
+**Note1** Some files will be created in the index folder, those files constitute the index that BWA uses.
+
+**Note2**: The index must created only once, it will be used for all the different alignments with BWA.
+
++ Aligning with new BWA-MEM in both single-end (SE) and paired-end (PE) modes
+
+BWA-MEM is the recommended algorithm to use now. You can check the options by executing:
+
+```{r}
+bwa mem
+
+```
+To align SE with BWA-MEM execute:
+
+```{r}
+bwa mem -t 4 -R "@RG\tID:foo\tSM:bar\tPL:Illumina\tPU:unit1\tLB:lib1" programs/bwa/index/f000_chr21_ref_genome_sequence.fa curso/Dados/dna_chr21_100_hq_read1.fastq > curso/results/bwa/results1.sam
+
+```
+
+To align PE with BAM-MEM just add the second file
+
+```{r}
+bwa mem -t 4 -R "@RG\tID:foo\tSM:bar\tPL:Illumina\tPU:unit1\tLB:lib1" programs/bwa/index/f000_chr21_ref_genome_sequence.fa curso/Dados/dna_chr21_100_hq_read1.fastq curso/Dados/dna_chr21_100_hq_read2.fastq > curso/results/bwa/results2.sam
+```
 
 
-
-
-### <a id="LO3.2">3.2 - The SAM/BAM alignment format</a>
+### The SAM/BAM alignment format
 
 To store millions of alignments, researchers also had to develop new, more practical formats. The [Sequence Alignment/Map (SAM) format](https://samtools.github.io/hts-specs/SAMv1.pdf) is a tabular text file format, where each line contains information for one alignment.
  
-![SAM Structure](images/bam_structure.png) 
 
-**TASK** Open the sam file you generated before (SRR1030347.alignment.sam) with a text editor, and/or type in the terminal window 'head SRR1030347.alignment.sam'. To make it easier to analyse you can copy the contents and paste them in a spreadsheet program.
 
-**QUESTION**: What is the position of the start of the first alignment in your SAM file? 
-<details><summary>Click Here to see the answer</summary>
-	Read SRR1030347.285 aligns starting in position 14 (information in the 4th column of the SAM).
-</details>
+**Exercise 14** Open the sam file you generated before (results1.sam) with a text editor, and/or type in the terminal window 'head results1.sam'. To make it easier to analyse you can copy the contents and paste them in a spreadsheet program.
+
 <br/>
 
 SAM files are most often compressed as BAM (Binary SAM) files, to reduce space. These BAM files can then be indexed (do not confuse this indexing with the indexing of the reference genome) to allow direct access to alignments in any arbitrary region of the genome. Several tools only work with BAM files.
 
-**TASK** Let's transform the SAM file into an indexed BAM file. In the same terminal window where you indexed the genome, type 'samtools view -Sb SRR1030347.alignment.sam > SRR1030347.alignment.bam'. To create the index, the alignments in the bam file need to be sorted by position. Type 'samtools sort SRR1030347.alignment.bam  SRR1030347.alignment.sorted'. Finally, we can create the index 'samtools index SRR1030347.alignment.sorted.bam'. Notice now the appearance of a companion file SRR1030347.alignment.sorted.bam.bai that contains the index. This file should always accompany its corresponding bam file.
+**Exercise 15** Let's transform the SAM file into an indexed BAM file. In the same terminal window where you indexed the genome, type 'samtools view -Sb results2.sam > results2.bam'. To create the index, the alignments in the bam file need to be sorted by position. Type 'samtools sort results2.bam  results2.sorted.bam'. Finally, we can create the index 'samtools index results2.sorted.bam'. Notice now the appearance of a companion file results2.sorted.bam.bai that contains the index. This file should always accompany its corresponding bam file.
 
-**TASK** Let's do the whole process using galaxy. Upload the reference genome and the paired fastq files into Galaxy. Check their quality and perform any necessary filtering using trimmomatic or with any of the tools we saw before. Next, perform an alignment with bwa mem of the paired reads (you need to select the option of paired reads) against the reference genome (choose one from history). Next, download the bam file that was created. Also download the companion bai index file (you need to press on the download icon to have the option to download the bam and the bai files). 
+
 <br/>
 <br/>
 
-**NOTE**: Turn on the green light when you're finished. Assess how well you achieve the learning outcome. For this, see how well you responded to the different questions during the activities and also make the following questions to yourself.
 
-* Did you broadly understand the challenges of aligning millions of short reads to a genome? 
 
-* Did you broadly understand the assumptions underlying the use of burrows-wheeler aligners?
+## Visualize alignments
 
-* Could you use bwa to align reads to a reference genome? 
-
-* Do you know what is the most common alignment format these aligners use? 
-
-* Do you broadly understand the contents of a SAM/BAM file and the difference between SAM and BAM? 
-<br/>
-<br/>
-
-## <a id="LO4">4 - Visualize alignments</a>
-
-### <a id="LO4.1">4.1 - Use Qualimap to assess quality of alignments</a>
+###  Use Qualimap to assess quality of alignments
 
 After generating alignments and obtaining a SAM/BAM file, how do I know this step went well? The same way as FastQC generates reports of fastq files to assess quality of raw data, there are programs that generate global reports on the quality of alignments. One popular tool for this is [qualimap](http://qualimap.bioinfo.cipf.es/).
 
-**TASK** In the terminal window, in the resequencing folder, type 'qualimap bamqc -bam SRR1030347.alignment.sorted.bam'. Open the report file generated by qualimap (there is a report html inside a new folder that qualimap creates).
+**Exercise 16** In the terminal window, in the resequencing folder, type 'qualimap bamqc -bam results2.sorted.bam'. Open the report file generated by qualimap (there is a report html inside a new folder that qualimap creates). Or go to qualimap folder and type ./qualimap it will open an graphic interface program.
 
-**QUESTION**: What information is in a Qualimap report?
++ What information is in a Qualimap report?
+
 <details><summary>Click Here to see the answer</summary>
 
 A Qualimap report includes, among other things:  
@@ -302,79 +341,18 @@ A Qualimap report includes, among other things:
 </details><br/>
 
 
-**QUESTION**: Is the whole genome covered in the example you ran? 
-<details><summary>Click Here to see the answer</summary>
-	No, only a small subset of locations in the genome have reads aligned. This dataset only contais reads for a set of predefined regions.
-</details><br/>
-
  
 Many of the plots produced by Qualimap are similar to the ones produced by FastQC. There are nonetheless, figures that are specific to alignments. One important figure to look at is the **alignment rate** (percentage of the total reads that align). In this case, we want it to be as close as possible to 100%. In the case of bacterial sequencing or targeted (eg. exonic) sequencing you expect >95% successful alignment, but if sequencing a full mamallian genome (with many duplicated areas) it may be normal to have as low as 70-80% alignment success. Another alignment-specific figure is the **coverage** along the genome. The coverage on a position is the number of reads whose alignment overlap with that position. Another factor to take into account is the amount of duplicated sequences. Usually, duplication levels higher than 20% are not a good sign (they're a sign of low input DNA and PCR artifacts) but again, depends on what you are sequencing and how much. In any of these factors one has to antecipate the expected “quality” for your application.
 
-**TASK**: Open the reports example_HiSeqBGI.pdf and example_MiSeq.pdf (click on the pdf files, or use acroread). Both reports are from alignments to Escherichia coli. 
 
-**QUESTION**: What is the difference in the sequence coverage between those two files? 
-<details><summary>Click Here to see the answer</summary>
-	The HiSeq_BGI example displays a homogeneous coverage of ~110x, with a few noticeable drops (the largest one, at least probably due to a deletion, and a small region in the end that displays a coverage of ~170x (probably due to a duplication event). The MiSeq example displays a more heterogeneous coverage between 25-40x coverage, with a noticeable dip towards the end (likely to be due to a deletion).
-</details>
-<br/>
 
-**QUESTION**: What is the difference in the insert size histograms between those two files? 
-<details><summary>Click Here to see the answer</summary>
-	The HiSeq_BGI example displays a homogeneous insert size between 450-500bp. The MiSeq example displays a broad distribution of fragment lengths between 50-800bp. HiSeq_BGI is the result of a technique that fragments DNA mechanically and fragments of a given length are size-selected in a gel. On the other hand, the MiSeq example uses the Nextera library preparation kit, where the DNA is fragmented using an enzyme that immediately adds the sequencing primers.
-</details>
-<br/>
-
-**QUESTION**: Given what you saw in the two previous questions, can you think of reasons that may explain the more heterogeneous coverage of the MiSeq example (particularly the heterogeneity observed along the genome)?
-<details><summary>Click Here to see the answer</summary>
-	The lower coverage may explain a higher local variation, but not the genome-wide positional bias in coverage. Another explanation is the use of enzymatic fragmentation, which is not entirely random, but again this is unlikely to explain the positional variation. A more likely explanation is that bacteria are still in exponencial growth in the case of the MiSeq example, which would explain a greater amount of DNA fragments obtained from the region surrounding the origin of replication.
-</details>
-<br/>
-<br/>
-
-### <a id="LO4.2">4.2 - Use IGV to visualize the content of a BAM file</a>
+### Use IGV to visualize the content of a BAM file
 
 You can also directly visualize the alignments using appropriate software such as [IGV](https://www.broadinstitute.org/igv/) or [Tablet](https://ics.hutton.ac.uk/tablet/). 
 
-**TASK** In the terminal window, type 'igv'. Wait some time, and the IGV browser should appear. First, load the reference genome used for the alignment (load genome NC_000913.3_MG1655.fasta as file). You should see a chromosome of ~4.5Mb appearing, which is the genome size of Escherichia coli. Next, load the file SRR1030347.alignment.sorted.bam and/or the one you downloaded from Galaxy. You should see new tracks appearing in IGV when you load a file. 
+**Exercise 17** In the terminal window, type 'igv'. Wait some time, and the IGV browser should appear. First, load the reference genome used for the alignment. You should see a chromosome of ~4.8Mb appearing, which is the genome size. Next, load the file results2.sorted.bam. You should see new tracks appearing in IGV when you load a file. 
 
-**QUESTION:** Paste in the interval window on the top this position: 'Chromosome:3846244-3846290'. What can you see? 
-<details><summary>Click Here to see the answer</summary>
-You can see an A to C SNP (Single Nucleotide Polymorphism) at position 3846267.
 
-![IGV SNP](images/igv_snp.png)
 
-</details>
-<br/>
-
-**QUESTION:** Paste in the interval window on the top these two positions separated by space: 'Chromosome:1-1000 Chromosome:4640500-4641652'. What can you see? 
-<details><summary>Click Here to see the answer</summary>
-You should see colors in some reads. These colors mean that the fragment lengths (estimated by the distances between the paired reads) are much significantly different to the mean fragment lengths. These are usually an indication of a structural variant (such as a large deletion). In this case, the estimated fragment length is the size of the genome! This is easy to understand if you realize this is a circular genome from a bacteria, and thus it is natural that a read aligning in the "beginning" of the genome may have its pair aligning in the "end" of the genome.
-	
-![IGV SV](images/igv_sv.png) 
-	
-</details>
-<br/>
-
-**QUESTION:** Paste in the interval window on the top this position: 'Chromosome:3759212-3768438'. What can you see? 
-<details><summary>Click Here to see the answer</summary>
-You can see two regions where the reads are marked in white, both with slightly less coverage than the remaining regions marked in gray. The reads marked in white have a mapping quality of Q=0, which means the aligner does not know where these reads actually belong to. Most genomes (particularly mamallian genomes) contain areas of low complexity, composed mostly of repetitive sequences. In the case of short reads, sometimes these align to multiple regions in the genome equally well, making it impossible to know where the fragment came from. Longer reads are needed to overcome these difficulties, or in the absence of these, paired-end data can also be used. Some aligners (such as bwa) can use information on paired reads to help disambiguate some alignments. Information on paired reads is also added to the SAM file when proper aligners are used.
-
-![IGV SV](images/igv_uniq.png) 
-
-</details>
-<br/>
-<br/>
-
-**NOTE**: Turn on the green light when you're finished. Assess how well you achieve the learning outcome. For this, see how well you responded to the different questions during the activities and also make the following questions to yourself.
-
-*: Did you broadly understand the different aspects to consider when evaluating the quality of your alignments?
-
-* Could you use Qualimap to produce quality reports from your SAM/BAM alignments? 
-
-* Did you broadly understand the information in a Qualimap report and use it to detect potential issues in your data? 
-
-* Could you use IGV to visualize alignments in the SAM/BAM format? 
-<br/>
-<br/>
 
 
