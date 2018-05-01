@@ -1,4 +1,4 @@
-# Exercises Introduction to NGS Data Anaylis
+# Exercises - Introduction to NGS Data Analysis
 
 **Note** The exercises presented in this course are adapted from Daniel Sobral material course @ IGC from the [Git Hub](https://github.com/GTPB/ELB18F) and from the [on line course] (http://www.ngscourse.org/).
 
