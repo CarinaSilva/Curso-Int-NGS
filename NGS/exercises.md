@@ -294,7 +294,7 @@ bwa mem -t 4 -R "@RG\tID:foo\tSM:bar\tPL:Illumina\tPU:unit1\tLB:lib1" programs/b
 ```
 
 
-### The SAM/BAM alignment format
+> ## The SAM/BAM alignment format
 
 To store millions of alignments, researchers also had to develop new, more practical formats. The [Sequence Alignment/Map (SAM) format](https://samtools.github.io/hts-specs/SAMv1.pdf) is a tabular text file format, where each line contains information for one alignment.
  
@@ -314,7 +314,7 @@ SAM files are most often compressed as BAM (Binary SAM) files, to reduce space. 
 
 
 
-## Visualize alignments
+> ## Visualize alignments
 
 ###  Use Qualimap to assess quality of alignments
 
@@ -346,7 +346,7 @@ Many of the plots produced by Qualimap are similar to the ones produced by FastQ
 
 
 
-### Use IGV to visualize the content of a BAM file
+## Use IGV to visualize the content of a BAM file
 
 You can also directly visualize the alignments using appropriate software such as [IGV](https://www.broadinstitute.org/igv/) or [Tablet](https://ics.hutton.ac.uk/tablet/). 
 
