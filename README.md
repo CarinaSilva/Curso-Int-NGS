@@ -1,20 +1,19 @@
 
-### Curso-Introdutório-Next-Generation-Sequenting-(NGS)
+# Introduction-to-Next-Generation-Sequenting-(NGS)
 
-## 2ª Parte - Introdução à análise de dados NGS
+## 2nd part - Introduction to NGS data analysis
 
-## 
+### Learning outcomes
 
-**1.** Agenda
++ To learn the basics to understand and be able to conduct a standard NGS data analysis 
+from scratch in a Linux environment.
 
-**2.** Introduction to Linux shell
++ To know and understand the different data analysis pipelines and formats (FASTQ, 
+SAM/BAM, VCF).
 
-**3.** 
++ To preprocess and perform QC of raw and processed data.
 
-**4.**
++ To learn and use tools to perform NGS data analysis and visualization.
 
-**5.**
-
-**6.**
 
 
