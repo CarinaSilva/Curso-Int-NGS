@@ -38,19 +38,20 @@ This serves to exemplify that most reads in current sequencing machines are like
 Many sequencing machines can read both ends of a fragment. In this case, the machine will generate two **paired** fastq files, one with the forward reads and another with the reverse reads. You can find an example of this in the folder [files](https://github.com/CarinaSilva/Curso-Int-NGS/tree/master/NGS/Files) where fastq file paired_end_example_1 contains the forward reads and paired_end_example_2 the reverse reads. These fastq are paired because the reads for the same fragment are in the same order in the two files. For example, the first read in the forward fastq correponds to the forward reading of the same fragment as the first read in the reverse fastq.
 
 
-**Exercise 5**: Inside the folder files you can see several compressed fastq files. Uncompress the fastq files paired_end_example_1.fastq.gz and paired_end_example_2.fastq.gz that are in the folder files. Open the uncompressed fastq files using any text editor (eg. kate). Can you see a relationship betweem the reads in both files?
+**Exercise 5**: Inside the folder files you can see several compressed fastq files. Uncompress the fastq files paired_end_example_1.fastq.gz and paired_end_example_2.fastq.gz that are in the folder files. Open the uncompressed fastq files using any text editor (eg. nano, gedit,kate). Can you see a relationship betweem the reads in both files?
 
 Create an empty  directory to work in the exercise and copy or download the raw data to it:
 
 ```{r}
 
 mkdir quality_control
-cd quality_control gunzip paired_end_example_1.fastq.gz  
+cd quality_control 
+gunzip paired_end_example_1.fastq.gz  
 gunzip paired_end_example_2.fastq.gz
 
 # Use the command head to have a view of the first lines of the file
 
-head paired_end_example_1.fastq.gz
+head paired_end_example_1.fastq
 
 # Use the command wc to count how many reads are in the file (remember you have to divide by 4)
 
