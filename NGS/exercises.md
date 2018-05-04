@@ -81,7 +81,7 @@ Other plots indicate biases in nucleotidic content of reads, either globally (su
 
 
 
-**Exercise 6**: Open a terminal. Type 'fastqc' and press enter. The graphical interface of FastQC should appear. Open the file MiSeq_76bp.fastq.gz inside of the folder files. Look at the different plots you obtained. Next, open the file MiSeq_250bp.fastq.gz.
+**Exercise 6**: Open a terminal. Type 'fastqc' and press enter. The graphical interface of FastQC should appear. Download the file MiSeq_76bp.fastq.gz inside of the folder [files](https://github.com/CarinaSilva/Curso-Int-NGS/tree/master/NGS/Files). Look at the different plots you obtained. Next, download the file MiSeq_250bp.fastq.gz.
 
 **NOTE**: Given the size of fastq files (usually in the order of Gb), they are most frequently compressed as fastq.gz files. In fact, most tools (such as FastQC) work directly with fastq.gz to reduce space.
 
