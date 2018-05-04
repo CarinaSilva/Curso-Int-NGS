@@ -35,7 +35,7 @@ This serves to exemplify that most reads in current sequencing machines are like
 </p></details>
 <br/>
 
-Many sequencing machines can read both ends of a fragment. In this case, the machine will generate two **paired** fastq files, one with the forward reads and another with the reverse reads. You can find an example of this is the example fastq files paired_end_example_1 (containing the forward reads) and paired_end_example_2 (containing the reverse reads). These fastq are paired because the reads for the same fragment are in the same order in the two files. For example, the first read in the forward fastq correponds to the forward reading of the same fragment as the first read in the reverse fastq.
+Many sequencing machines can read both ends of a fragment. In this case, the machine will generate two **paired** fastq files, one with the forward reads and another with the reverse reads. You can find an example of this in the folder (files)[https://github.com/CarinaSilva/Curso-Int-NGS/tree/master/NGS/Files] where fastq file paired_end_example_1 contains the forward reads and paired_end_example_2 the reverse reads. These fastq are paired because the reads for the same fragment are in the same order in the two files. For example, the first read in the forward fastq correponds to the forward reading of the same fragment as the first read in the reverse fastq.
 
 
 **Exercise 5**: Inside the folder files you can see several compressed fastq files. Uncompress the fastq files paired_end_example_1.fastq.gz and paired_end_example_2.fastq.gz that are in the folder files. Open the uncompressed fastq files using any text editor (eg. kate). Can you see a relationship betweem the reads in both files?
